@@ -132,6 +132,9 @@ npx vsdx-kit generate "带刷新令牌的 OAuth 登录流程" -o oauth.vsdx
 
 ## 相关
 
+- [VSDX.ai](https://vsdx.ai/?utm_source=vsdx-kit)：AI 生成 Visio，文字、图片、文档转可编辑 `.vsdx`。
+- [LayerBack VSDX 在线查看器](https://layerback.com/vsdx-viewer?utm_source=vsdx-kit)：没装 Visio 时，免费在浏览器里打开 vsdx-kit 生成的文件。
+- [LayerBack](https://layerback.com/?utm_source=vsdx-kit)：把图表图片或 PDF 还原成可编辑的 VSDX、PPTX、draw.io 或 SVG。
 - [awesome-visio](https://github.com/TopLocalAI/awesome-visio)
 
 ## 许可证

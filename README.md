@@ -249,6 +249,9 @@ pnpm schema      # regenerate schema/diagram.schema.json
 
 ## Related
 
+- [VSDX.ai](https://vsdx.ai/?utm_source=vsdx-kit) — AI Visio generator: text, pictures and documents to editable `.vsdx`.
+- [LayerBack VSDX Viewer](https://layerback.com/vsdx-viewer?utm_source=vsdx-kit) — free online viewer to check the files vsdx-kit writes when you don't have Visio.
+- [LayerBack](https://layerback.com/?utm_source=vsdx-kit) — rebuilds a picture or PDF of a diagram as editable VSDX, PPTX, draw.io or SVG.
 - [awesome-visio](https://github.com/TopLocalAI/awesome-visio) — a curated list of Visio tools, libraries and resources.
 
 ## License

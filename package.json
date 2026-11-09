@@ -1,10 +1,13 @@
 {
   "name": "vsdx-kit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Generate native Microsoft Visio (.vsdx) files from JSON or draw.io — no Visio, no browser. CLI, Node library and MCP server.",
   "license": "MIT",
-  "author": "TopLocalAI",
-  "homepage": "https://github.com/TopLocalAI/vsdx-kit#readme",
+  "author": {
+    "name": "TopLocalAI",
+    "url": "https://vsdx.ai/?utm_source=npm"
+  },
+  "homepage": "https://vsdx.ai/?utm_source=npm",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TopLocalAI/vsdx-kit.git"
