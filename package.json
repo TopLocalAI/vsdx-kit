@@ -1,0 +1,87 @@
+{
+  "name": "vsdx-kit",
+  "version": "0.1.0",
+  "description": "Generate native Microsoft Visio (.vsdx) files from JSON or draw.io — no Visio, no browser. CLI, Node library and MCP server.",
+  "license": "MIT",
+  "author": "TopLocalAI",
+  "homepage": "https://github.com/TopLocalAI/vsdx-kit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TopLocalAI/vsdx-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TopLocalAI/vsdx-kit/issues"
+  },
+  "keywords": [
+    "visio",
+    "vsdx",
+    "drawio",
+    "diagram",
+    "mcp",
+    "flowchart",
+    "microsoft-visio",
+    "draw.io",
+    "elk",
+    "model-context-protocol"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./mcp": {
+      "types": "./dist/mcp.d.ts",
+      "import": "./dist/mcp.js"
+    },
+    "./schema.json": "./schema/diagram.schema.json",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "vsdx-kit": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "assets",
+    "schema",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && chmod +x dist/cli.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "test": "vitest run",
+    "schema": "tsx scripts/build-schema.ts",
+    "examples": "tsx scripts/render-examples.ts",
+    "prepublishOnly": "pnpm build && pnpm test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "@resvg/resvg-js": "^2.6.2",
+    "elkjs": "^0.12.1",
+    "entities": "^6.0.1",
+    "fast-xml-parser": "^5.12.0",
+    "jszip": "^3.10.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.6.6",
+    "@types/node": "^26.6.6",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}
