@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/TopLocalAI/vsdx-kit/main/schema/diagram.schema.json",
+  "title": "vsdx-kit diagram",
+  "description": "A diagram for vsdx-kit: nodes, edges and optional groups. Layout is automatic. https://github.com/TopLocalAI/vsdx-kit",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "title": {
+      "description": "Title drawn above the diagram; also the page name.",
+      "type": "string",
+      "maxLength": 500
+    },
+    "direction": {
+      "description": "Main flow direction. Default \"right\".",
+      "type": "string",
+      "enum": [
+        "right",
+        "down",
+        "left",
+        "up"
+      ]
+    },
+    "nodes": {
+      "minItems": 1,
+      "maxItems": 2000,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "Unique node id, referenced by edges."
+          },
+          "label": {
+            "description": "Text shown in the shape. Use \\n for line breaks.",
+            "type": "string",
+            "maxLength": 2000
+          },
+          "shape": {
+            "description": "Shape kind. Default \"roundedRect\".",
+            "type": "string",
+            "enum": [
+              "rect",
+              "roundedRect",
+              "ellipse",
+              "circle",
+              "diamond",
+              "cylinder",
+              "hexagon",
+              "note",
+              "actor",
+              "text",
+              "image"
+            ]
+          },
+          "fill": {
+            "description": "Fill colour.",
+            "type": "string",
+            "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$|^none$"
+          },
+          "stroke": {
+            "description": "Border colour.",
+            "type": "string",
+            "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$|^none$"
+          },
+          "fontColor": {
+            "description": "Text colour.",
+            "type": "string",
+            "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$|^none$"
+          },
+          "fontSize": {
+            "description": "Font size in px. Default 13.",
+            "type": "number",
+            "minimum": 6,
+            "maximum": 72
+          },
+          "bold": {
+            "type": "boolean"
+          },
+          "dashed": {
+            "description": "Dashed border.",
+            "type": "boolean"
+          },
+          "group": {
+            "description": "Id of the group (container) this node belongs to.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "image": {
+            "description": "Embedded picture for shape \"image\": a data URI (data:image/png;base64,…, JPEG or SVG). In the CLI a local file path also works.",
+            "type": "string"
+          },
+          "width": {
+            "description": "Fixed width in px (default: fit text).",
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 4000
+          },
+          "height": {
+            "description": "Fixed height in px (default: fit text).",
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 4000
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "edges": {
+      "maxItems": 5000,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Optional edge id (default e1, e2, …).",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "from": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "Source node id."
+          },
+          "to": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "Target node id."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "dashed": {
+            "type": "boolean"
+          },
+          "arrow": {
+            "description": "Arrowheads. Default \"end\".",
+            "type": "string",
+            "enum": [
+              "end",
+              "start",
+              "both",
+              "none"
+            ]
+          },
+          "color": {
+            "description": "Line colour.",
+            "type": "string",
+            "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$|^none$"
+          }
+        },
+        "required": [
+          "from",
+          "to"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "groups": {
+      "maxItems": 500,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "Unique group id."
+          },
+          "label": {
+            "description": "Title shown in the container header.",
+            "type": "string",
+            "maxLength": 500
+          },
+          "fill": {
+            "type": "string",
+            "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$|^none$",
+            "description": "CSS hex colour such as \"#DAE8FC\", or \"none\"."
+          },
+          "stroke": {
+            "type": "string",
+            "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$|^none$",
+            "description": "CSS hex colour such as \"#DAE8FC\", or \"none\"."
+          },
+          "parent": {
+            "description": "Id of an enclosing group (nested containers).",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "nodes"
+  ],
+  "additionalProperties": false
+}
