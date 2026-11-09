@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/diagram.schema.json",
+  "title": "Acme Inc. — leadership",
+  "direction": "down",
+  "nodes": [
+    { "id": "ceo", "label": "Jane Park\nCEO", "bold": true, "fill": "#1E3A8A", "stroke": "#1E3A8A", "fontColor": "#FFFFFF" },
+    { "id": "cto", "label": "Leo Chen\nCTO" },
+    { "id": "cfo", "label": "Maria Rossi\nCFO" },
+    { "id": "coo", "label": "Sam Okafor\nCOO" },
+    { "id": "eng", "label": "Engineering" , "shape": "rect", "fill": "#F5F5F5", "stroke": "#666666" },
+    { "id": "it", "label": "IT & Security", "shape": "rect", "fill": "#F5F5F5", "stroke": "#666666" },
+    { "id": "fin", "label": "Finance", "shape": "rect", "fill": "#F5F5F5", "stroke": "#666666" },
+    { "id": "ops", "label": "Operations", "shape": "rect", "fill": "#F5F5F5", "stroke": "#666666" },
+    { "id": "sup", "label": "Customer support", "shape": "rect", "fill": "#F5F5F5", "stroke": "#666666" }
+  ],
+  "edges": [
+    { "from": "ceo", "to": "cto", "arrow": "none" },
+    { "from": "ceo", "to": "cfo", "arrow": "none" },
+    { "from": "ceo", "to": "coo", "arrow": "none" },
+    { "from": "cto", "to": "eng", "arrow": "none" },
+    { "from": "cto", "to": "it", "arrow": "none" },
+    { "from": "cfo", "to": "fin", "arrow": "none" },
+    { "from": "coo", "to": "ops", "arrow": "none" },
+    { "from": "coo", "to": "sup", "arrow": "none" }
+  ]
+}

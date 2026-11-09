@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm build
+      - run: pnpm test
+      - name: CLI smoke test
+        run: |
+          node dist/cli.js convert examples/order-flow.json -o /tmp/order-flow.vsdx
+          node dist/cli.js convert examples/two-pages-compressed.drawio -o /tmp/two-pages.vsdx
+          node dist/cli.js inspect /tmp/two-pages.vsdx
+
+  runtime:
+    # the library and CLI run on older Node versions than the test tooling needs
+    needs: test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 20]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile && pnpm build
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: node dist/cli.js convert examples/microservices.json -o /tmp/ms.vsdx && node dist/cli.js inspect /tmp/ms.vsdx

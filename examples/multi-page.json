@@ -1,0 +1,29 @@
+[
+  {
+    "title": "Overview",
+    "nodes": [
+      { "id": "a", "label": "Client" },
+      { "id": "b", "label": "Server" },
+      { "id": "c", "label": "Storage", "shape": "cylinder" }
+    ],
+    "edges": [
+      { "from": "a", "to": "b", "label": "request", "arrow": "both" },
+      { "from": "b", "to": "c" }
+    ]
+  },
+  {
+    "title": "State machine",
+    "direction": "down",
+    "nodes": [
+      { "id": "idle", "label": "Idle", "shape": "circle" },
+      { "id": "run", "label": "Running", "shape": "roundedRect" },
+      { "id": "err", "label": "Error", "shape": "roundedRect", "fill": "#F8CECC", "stroke": "#B85450" }
+    ],
+    "edges": [
+      { "from": "idle", "to": "run", "label": "start" },
+      { "from": "run", "to": "idle", "label": "stop" },
+      { "from": "run", "to": "err", "label": "fail" },
+      { "from": "err", "to": "idle", "label": "reset", "dashed": true }
+    ]
+  }
+]

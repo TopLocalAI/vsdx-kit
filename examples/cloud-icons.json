@@ -1,0 +1,20 @@
+{
+  "$schema": "../schema/diagram.schema.json",
+  "title": "Web app with icons",
+  "direction": "right",
+  "groups": [{ "id": "vpc", "label": "Private network" }],
+  "nodes": [
+    { "id": "u", "label": "Users", "shape": "image", "image": "icons/user.svg", "width": 56, "height": 56 },
+    { "id": "c", "label": "Cloud edge", "shape": "image", "image": "icons/cloud.svg", "width": 72, "height": 54 },
+    { "id": "s1", "label": "App server 1", "shape": "image", "image": "icons/server.svg", "group": "vpc" },
+    { "id": "s2", "label": "App server 2", "shape": "image", "image": "icons/server.svg", "group": "vpc" },
+    { "id": "db", "label": "Database", "shape": "image", "image": "icons/database.svg", "group": "vpc" }
+  ],
+  "edges": [
+    { "from": "u", "to": "c" },
+    { "from": "c", "to": "s1" },
+    { "from": "c", "to": "s2" },
+    { "from": "s1", "to": "db", "arrow": "both" },
+    { "from": "s2", "to": "db", "arrow": "both" }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "../schema/diagram.schema.json",
+  "title": "Order fulfilment",
+  "direction": "right",
+  "nodes": [
+    { "id": "start", "label": "Order received", "shape": "ellipse" },
+    { "id": "validate", "label": "Validate order" },
+    { "id": "stock", "label": "In stock?", "shape": "diamond" },
+    { "id": "pay", "label": "Charge payment" },
+    { "id": "paid", "label": "Payment OK?", "shape": "diamond" },
+    { "id": "ship", "label": "Pick, pack & ship" },
+    { "id": "backorder", "label": "Create backorder", "fill": "#F8CECC", "stroke": "#B85450" },
+    { "id": "notify", "label": "Email customer", "shape": "note" },
+    { "id": "done", "label": "Done", "shape": "ellipse", "fill": "#F8CECC", "stroke": "#B85450" }
+  ],
+  "edges": [
+    { "from": "start", "to": "validate" },
+    { "from": "validate", "to": "stock" },
+    { "from": "stock", "to": "pay", "label": "yes" },
+    { "from": "stock", "to": "backorder", "label": "no" },
+    { "from": "pay", "to": "paid" },
+    { "from": "paid", "to": "ship", "label": "yes" },
+    { "from": "paid", "to": "notify", "label": "declined", "dashed": true },
+    { "from": "backorder", "to": "notify" },
+    { "from": "ship", "to": "done" },
+    { "from": "notify", "to": "done" }
+  ]
+}

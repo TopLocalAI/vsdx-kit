@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema/diagram.schema.json",
+  "title": "E-commerce microservices",
+  "direction": "right",
+  "groups": [
+    { "id": "edge", "label": "Edge" },
+    { "id": "core", "label": "Core services" },
+    { "id": "data", "label": "Data layer", "parent": "core" }
+  ],
+  "nodes": [
+    { "id": "user", "label": "Shopper", "shape": "actor" },
+    { "id": "cdn", "label": "CDN", "shape": "hexagon", "group": "edge" },
+    { "id": "gw", "label": "API Gateway", "group": "edge" },
+    { "id": "auth", "label": "Auth service", "group": "core" },
+    { "id": "catalog", "label": "Catalog service", "group": "core" },
+    { "id": "orders", "label": "Order service", "group": "core" },
+    { "id": "pg", "label": "PostgreSQL", "shape": "cylinder", "group": "data" },
+    { "id": "redis", "label": "Redis cache", "shape": "cylinder", "group": "data" },
+    { "id": "queue", "label": "Event bus", "shape": "rect", "fill": "#FFE6CC", "stroke": "#D79B00" },
+    { "id": "mail", "label": "Email worker" }
+  ],
+  "edges": [
+    { "from": "user", "to": "cdn", "label": "HTTPS" },
+    { "from": "cdn", "to": "gw" },
+    { "from": "gw", "to": "auth" },
+    { "from": "gw", "to": "catalog" },
+    { "from": "gw", "to": "orders" },
+    { "from": "catalog", "to": "redis" },
+    { "from": "orders", "to": "pg" },
+    { "from": "auth", "to": "pg" },
+    { "from": "orders", "to": "queue", "label": "OrderPlaced", "dashed": true },
+    { "from": "queue", "to": "mail", "dashed": true }
+  ]
+}

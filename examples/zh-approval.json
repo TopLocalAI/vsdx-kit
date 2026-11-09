@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/diagram.schema.json",
+  "title": "请假审批流程",
+  "direction": "down",
+  "nodes": [
+    { "id": "s", "label": "员工提交请假申请", "shape": "ellipse" },
+    { "id": "m", "label": "直属经理审批" },
+    { "id": "d1", "label": "请假超过3天？", "shape": "diamond" },
+    { "id": "hr", "label": "人力资源部复核" },
+    { "id": "d2", "label": "是否批准？", "shape": "diamond" },
+    { "id": "ok", "label": "更新考勤系统\n通知员工", "fill": "#D5E8D4", "stroke": "#82B366" },
+    { "id": "no", "label": "退回申请并说明原因", "fill": "#F8CECC", "stroke": "#B85450" },
+    { "id": "e", "label": "结束", "shape": "ellipse" }
+  ],
+  "edges": [
+    { "from": "s", "to": "m" },
+    { "from": "m", "to": "d1" },
+    { "from": "d1", "to": "hr", "label": "是" },
+    { "from": "d1", "to": "d2", "label": "否" },
+    { "from": "hr", "to": "d2" },
+    { "from": "d2", "to": "ok", "label": "批准" },
+    { "from": "d2", "to": "no", "label": "驳回" },
+    { "from": "ok", "to": "e" },
+    { "from": "no", "to": "e" }
+  ]
+}
