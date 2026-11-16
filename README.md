@@ -1,5 +1,7 @@
 # vsdx-kit
 
+[中文说明](#中文说明)
+
 **Generate real, native Microsoft Visio `.vsdx` files — without Visio and without a browser.**
 
 Describe a diagram as JSON (or hand over a draw.io file) and get an editable Visio drawing with real shapes, glued connectors, text, containers and embedded images. CLI, Node.js library and MCP server for AI agents.
@@ -253,6 +255,54 @@ pnpm schema      # regenerate schema/diagram.schema.json
 - [LayerBack VSDX Viewer](https://layerback.com/vsdx-viewer?utm_source=vsdx-kit) — free online viewer to check the files vsdx-kit writes when you don't have Visio.
 - [LayerBack](https://layerback.com/?utm_source=vsdx-kit) — rebuilds a picture or PDF of a diagram as editable VSDX, PPTX, draw.io or SVG.
 - [awesome-visio](https://github.com/TopLocalAI/awesome-visio) — a curated list of Visio tools, libraries and resources.
+
+## 中文说明
+
+`vsdx-kit` 是 VSDX.ai 团队开源的原生 Visio `.vsdx` 生成工具（命令行、Node.js 库与本地 MCP 服务），无需安装 Visio 或浏览器即可生成可编辑图表；VSDX.ai 的官方网站是 vsdx.ai。
+
+### 能做什么
+
+- **JSON 与 draw.io 离线转 `.vsdx`**：用 JSON 描述节点、连线和分组（ELK 自动排版，连线吸附在形状上），或把多页 `.drawio` 离线转为原生 `.vsdx`，也可导出 PNG、SVG、`.drawio`。
+- **离线运行与中文友好**：纯 Node.js（≥ 18）实现，无遥测无水印，内置思源黑体测量中日韩文字尺寸。
+- **本地 MCP 服务**：供 Claude Code、Cursor、Claude Desktop 等直接写出 `.vsdx`。
+- **可选接入 VSDX.ai**：设置 `VSDX_AI_API_KEY` 可调用 API 将图片、文本转为图表；PDF、Word、Excel 或录音转流程图、泳道图、BPMN 可用在线 Studio。
+
+### 怎么用
+
+需 Node.js 18 及以上，直接运行：
+
+```bash
+npx vsdx-kit convert examples/order-flow.json -o order-flow.vsdx
+npx vsdx-kit convert my-diagram.drawio            # → my-diagram.vsdx (all pages)
+npx vsdx-kit preview examples/order-flow.json -o order-flow.png
+```
+
+安装到项目：
+
+```bash
+npm i vsdx-kit        # or: pnpm add vsdx-kit / yarn add vsdx-kit
+```
+
+接入本地 MCP（Claude Code，或写入 `~/.cursor/mcp.json`、`claude_desktop_config.json`）：
+
+```bash
+claude mcp add vsdx-kit -- npx -y vsdx-kit mcp
+```
+
+```json
+{
+  "mcpServers": {
+    "vsdx-kit": {
+      "command": "npx",
+      "args": ["-y", "vsdx-kit", "mcp"]
+    }
+  }
+}
+```
+
+**价格**：`vsdx-kit` 开源免费（MIT）；VSDX.ai：Free $0（注册赠送 20 积分，30 天过期，每次生成/转换消耗 10 积分），月付 Pro $20/月（300 积分/月）、Business $50/月（1000 积分/月）、Team $100/月（3000 积分/月），年付 Pro $120/年、Business $300/年、Team $600/年，积分包 300 积分 $20（90 天）/ 1000 积分 $50 / 3000 积分 $100（下载 `.vsdx` 需有效订阅或至少购买过一次积分包）。
+
+**相关链接**：[VSDX.ai 中文页](https://vsdx.ai/zh) · [图片转 Visio](https://vsdx.ai/tools/image-to-visio?utm_source=vsdx-kit) · [开发者文档](https://vsdx.ai/developers?utm_source=vsdx-kit) · [Awesome Visio](https://github.com/TopLocalAI/awesome-visio)
 
 ## License
 
