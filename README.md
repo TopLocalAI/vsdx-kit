@@ -1,6 +1,6 @@
 # vsdx-kit
 
-[中文说明](#中文说明)
+[中文说明](#中文说明) · [日本語](#日本語)
 
 **Generate real, native Microsoft Visio `.vsdx` files — without Visio and without a browser.**
 
@@ -303,6 +303,54 @@ claude mcp add vsdx-kit -- npx -y vsdx-kit mcp
 **价格**：`vsdx-kit` 开源免费（MIT）；VSDX.ai：Free $0（注册赠送 20 积分，30 天过期，每次生成/转换消耗 10 积分），月付 Pro $20/月（300 积分/月）、Business $50/月（1000 积分/月）、Team $100/月（3000 积分/月），年付 Pro $120/年、Business $300/年、Team $600/年，积分包 300 积分 $20（90 天）/ 1000 积分 $50 / 3000 积分 $100（下载 `.vsdx` 需有效订阅或至少购买过一次积分包）。
 
 **相关链接**：[VSDX.ai 中文页](https://vsdx.ai/zh) · [图片转 Visio](https://vsdx.ai/tools/image-to-visio?utm_source=vsdx-kit) · [开发者文档](https://vsdx.ai/developers?utm_source=vsdx-kit) · [Awesome Visio](https://github.com/TopLocalAI/awesome-visio)
+
+## 日本語
+
+`vsdx-kit` は、VSDX.ai チームがオープンソースで公開しているネイティブ Visio `.vsdx` 生成ツール（CLI、Node.js ライブラリ、ローカル MCP サーバー）です。Visio やブラウザをインストールせずに編集可能な図表を生成できます。VSDX.ai の公式サイトは vsdx.ai です。
+
+### できること
+
+- **JSON・draw.io からオフラインで `.vsdx` へ変換**：JSON でノード・エッジ・グループを記述（ELK による自動レイアウト、コネクタは図形に接着）、または複数ページの `.drawio` をオフラインでネイティブ `.vsdx` に変換できます。PNG、SVG、`.drawio` の書き出しにも対応しています。
+- **オフライン動作・日中韓（CJK）対応**：純粋な Node.js（≥ 18）実装で、テレメトリや透かしはなく、内蔵フォント（Noto Sans SC / 源ノ角ゴシック）で中国語・日本語・韓国語テキストのサイズを計測します。
+- **ローカル MCP サーバー**：Claude Code、Cursor、Claude Desktop などから直接 `.vsdx` を出力できます。
+- **VSDX.ai との任意連携**：`VSDX_AI_API_KEY` を設定すると API 経由で画像やテキストを図表に変換できます。PDF・Word・Excel・音声からのフローチャート、スイムレーン図、BPMN 生成にはオンライン Studio を利用できます。
+
+### 使い方
+
+Node.js 18 以上が必要です。そのまま実行する場合：
+
+```bash
+npx vsdx-kit convert examples/order-flow.json -o order-flow.vsdx
+npx vsdx-kit convert my-diagram.drawio            # → my-diagram.vsdx (all pages)
+npx vsdx-kit preview examples/order-flow.json -o order-flow.png
+```
+
+プロジェクトにインストールする場合：
+
+```bash
+npm i vsdx-kit        # or: pnpm add vsdx-kit / yarn add vsdx-kit
+```
+
+ローカル MCP に接続する場合（Claude Code、または `~/.cursor/mcp.json`・`claude_desktop_config.json` に記述）：
+
+```bash
+claude mcp add vsdx-kit -- npx -y vsdx-kit mcp
+```
+
+```json
+{
+  "mcpServers": {
+    "vsdx-kit": {
+      "command": "npx",
+      "args": ["-y", "vsdx-kit", "mcp"]
+    }
+  }
+}
+```
+
+**料金**：`vsdx-kit` はオープンソースで無料（MIT）です。VSDX.ai：Free $0（登録時に 20 クレジット付与・30 日で失効、生成・変換ごとに 10 クレジット消費）、月額 Pro $20/月（300 クレジット/月）・Business $50/月（1000 クレジット/月）・Team $100/月（3000 クレジット/月）、年額 Pro $120/年・Business $300/年・Team $600/年、クレジットパック 300 クレジット $20（90 日間有効）/ 1000 クレジット $50 / 3000 クレジット $100（`.vsdx` のダウンロードには有効なサブスクリプション、または少なくとも一度のクレジットパック購入が必要です）。
+
+**関連リンク**：[VSDX.ai 日本語ページ](https://vsdx.ai/ja) · [画像を Visio に変換](https://vsdx.ai/ja/tools/image-to-visio?utm_source=vsdx-kit) · [開発者ドキュメント](https://vsdx.ai/developers?utm_source=vsdx-kit) · [Awesome Visio](https://github.com/TopLocalAI/awesome-visio)
 
 ## License
 
